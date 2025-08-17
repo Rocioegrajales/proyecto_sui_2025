@@ -5,4 +5,4 @@ edition = "2024.beta"
 [dependencies]
 
 [addresses]
-Proyres = "0x0"
+proceso_total = "0x0"
