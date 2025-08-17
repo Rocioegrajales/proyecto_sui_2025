@@ -2,20 +2,23 @@ module proceso_total::proceso_total;
     use std::debug::print;
     use std::string::{utf8, String};
 
-    public struct Recoleccion has drop {        
+    public struct Recoleccion has drop, key {     
+        id: UID,   
         forma: String,
         nombre: String,
         kilos: u8,
         tratado: bool
     }
 
-        fun residuo () {
+        public fun new(ctx: &mut TxContext) {
             let recoleccion1 = Recoleccion {
+                id: object::new(ctx),
                 forma:utf8(b"domicilio"),
                 nombre:utf8(b"alimento"),
                 kilos: 55,
                 tratado: true
             };
+            transfer::transfer(list, tx_context::sender(ctx));
 
             print(&recoleccion1);
         }
