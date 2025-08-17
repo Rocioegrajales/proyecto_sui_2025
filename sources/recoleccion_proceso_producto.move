@@ -36,7 +36,7 @@ module proceso_total::proceso_total;
         print(&proceso1);
     }
 
-    public struct Producto has drop {
+    public struct Control has drop {
         color: String,
         temperatura: u8,
         ph: u8,
@@ -44,8 +44,8 @@ module proceso_total::proceso_total;
         tamizado: bool
     }
 
-    fun control () {
-        let producto1 = Producto {
+    fun producto () {
+        let control1 = Control {
             color:utf8(b"cafe1"),
             temperatura: 23,
             ph: 7,
@@ -53,12 +53,31 @@ module proceso_total::proceso_total;
             tamizado: true
         };
 
-        print(&producto1);
+        print(&control1);
+    }
+
+    public struct Almacenaje has drop {
+        bodega: String,
+        temperatura: u8,
+        dias: u8,
+        empacado: bool     
+    }
+
+    fun bodegaje () {
+        let almacenaje1 = Almacenaje {
+            bodega: utf8(b"A5"),
+            temperatura: 20,
+            dias: 15,
+            empacado: true       
+        };
+
+        print(&almacenaje1);
     }
 
     #[test]
         fun prueba() {
             residuo();
             manejo();
-            control();
+            producto();
+            bodegaje();
         }
