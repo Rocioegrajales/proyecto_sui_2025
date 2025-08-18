@@ -2,41 +2,28 @@ module proceso_total::proceso_total;
     use std::debug::print;
     use std::string::{utf8, String};
 
-    public struct Recoleccion has drop {        
+    public struct Produccion has key, store {
+        id: UID,
+        recolecciones: vector<Recoleccion>,
+        procesos: vector<Proceso>,
+        controles: vector<Control>,
+        almacenajes: vector<Almacenaje>
+    }
+
+    public struct Recoleccion has drop, store {              
         forma: String,
         nombre: String,
         kilos: u8,
         tratado: bool
     }
 
-        fun residuo () {
-            let recoleccion1 = Recoleccion {
-                forma:utf8(b"domicilio"),
-                nombre:utf8(b"alimento"),
-                kilos: 55,
-                tratado: true
-            };
-
-            print(&recoleccion1);
-        }
-       
-    public struct Proceso has drop {
+    public struct Proceso has drop, store {
         modo: String,
         dias: u8,
         lote: String
     }
 
-    fun manejo () {
-        let proceso1 = Proceso {
-            modo:utf8(b"aerobico"),
-            dias: 30,
-            lote:utf8(b"am150825")
-        };
-
-        print(&proceso1);
-    }
-
-    public struct Control has drop {
+    public struct Control has drop, store {
         color: String,
         temperatura: u8,
         ph: u8,
@@ -44,7 +31,47 @@ module proceso_total::proceso_total;
         tamizado: bool
     }
 
-    fun producto () {
+    public struct Almacenaje has drop, store {
+        bodega: String,
+        temperatura: u8,
+        dias: u8,
+        empacado: bool     
+    }    
+
+    /// Inicializa
+    public fun new(ctx: &mut TxContext) {
+        let prod = Produccion {
+            id: object::new(ctx),
+            recolecciones: vector[],
+            procesos: vector[],
+            controles: vector[],
+            almacenajes: vector[]
+        };
+        transfer::transfer(prod, tx_context::sender(ctx));
+    }    
+
+    public fun residuo () {
+        let recoleccion1 = Recoleccion {                
+            forma:utf8(b"domicilio"),
+            nombre:utf8(b"alimento"),
+            kilos: 55,
+            tratado: true
+        };
+            
+            print(&recoleccion1);
+        }   
+
+        public fun manejo () {
+        let proceso1 = Proceso {
+            modo:utf8(b"aerobico"),
+            dias: 30,
+            lote:utf8(b"am150825")
+        };
+
+            print(&proceso1);
+        }
+    
+        public fun producto () {
         let control1 = Control {
             color:utf8(b"cafe1"),
             temperatura: 23,
@@ -55,14 +82,7 @@ module proceso_total::proceso_total;
 
         print(&control1);
     }
-
-    public struct Almacenaje has drop {
-        bodega: String,
-        temperatura: u8,
-        dias: u8,
-        empacado: bool     
-    }
-
+    
     fun bodegaje () {
         let almacenaje1 = Almacenaje {
             bodega: utf8(b"A5"),
