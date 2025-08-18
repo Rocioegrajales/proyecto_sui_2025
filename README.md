@@ -6,7 +6,7 @@ Problema que resuelve: Organiza los pasos para un proceso de manejo de sustancia
 
 Descripción
 
-El módulo proceso_total está diseñado para gestionar el proceso de producción de alimentos. Incluye estructuras para manejar recolecciones, procesos, controles y almacenajes, lo que permite un seguimiento detallado de cada etapa en la producción.
+El módulo proceso_total está diseñado para gestionar el proceso de manejo de residuos orgánicos sólidos. Incluye estructuras para manejar recolecciones, procesos, controles y almacenajes, lo que permite un seguimiento detallado de cada etapa en la producción.
 
 Estructuras
 
